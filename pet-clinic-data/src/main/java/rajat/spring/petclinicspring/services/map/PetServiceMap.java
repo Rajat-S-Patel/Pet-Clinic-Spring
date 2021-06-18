@@ -1,12 +1,12 @@
 package rajat.spring.petclinicspring.services.map;
 
-import rajat.spring.petclinicspring.model.Owner;
+import org.springframework.stereotype.Service;
 import rajat.spring.petclinicspring.model.Pet;
-import rajat.spring.petclinicspring.services.CrudService;
 import rajat.spring.petclinicspring.services.PetService;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet,Long> implements PetService {
 
     @Override
