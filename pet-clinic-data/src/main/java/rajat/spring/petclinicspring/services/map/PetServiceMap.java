@@ -3,10 +3,11 @@ package rajat.spring.petclinicspring.services.map;
 import rajat.spring.petclinicspring.model.Owner;
 import rajat.spring.petclinicspring.model.Pet;
 import rajat.spring.petclinicspring.services.CrudService;
+import rajat.spring.petclinicspring.services.PetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet,Long> implements CrudService<Pet,Long> {
+public class PetServiceMap extends AbstractMapService<Pet,Long> implements PetService {
 
     @Override
     public Set<Pet> findAll() {
