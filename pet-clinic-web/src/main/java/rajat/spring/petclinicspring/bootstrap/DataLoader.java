@@ -3,13 +3,14 @@ package rajat.spring.petclinicspring.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import rajat.spring.petclinicspring.model.Owner;
+import rajat.spring.petclinicspring.model.Pet;
 import rajat.spring.petclinicspring.model.PetType;
 import rajat.spring.petclinicspring.model.Vet;
 import rajat.spring.petclinicspring.services.OwnerService;
 import rajat.spring.petclinicspring.services.PetTypeService;
 import rajat.spring.petclinicspring.services.VetService;
-import rajat.spring.petclinicspring.services.map.OwnerServiceMap;
-import rajat.spring.petclinicspring.services.map.VetServiceMap;
+
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -31,25 +32,47 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Inside dataloader");
 
         PetType dog = new PetType();
-        dog.setName("Max");
-        petTypeService.save(dog);
-        System.out.println("saved dog with id: "+dog.getId());
+        dog.setName("Dog");
+        PetType savedDogType=petTypeService.save(dog);
+        System.out.println("saved type dog with id: "+dog.getId());
 
         PetType cat = new PetType();
-        cat.setName("Mini");
-        petTypeService.save(cat);
-        System.out.println("saved cat with id: "+cat.getId());
+        cat.setName("Cat");
+        PetType savedCatType=petTypeService.save(cat);
+        System.out.println("saved type cat with id: "+cat.getId());
 
         System.out.println("Creating owners");
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Rajat");
         owner1.setLastName("Patel");
-        ownerService.save(owner1);
+        owner1.setAddress("Akshat Heaven");
+        owner1.setCity("Gandhinagar");
+        owner1.setTelephone("1121232323");
+
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Shreya");
         owner2.setLastName("Patel");
+        owner2.setAddress("Akshat Heaven");
+        owner2.setCity("Gandhinagar");
+        owner2.setTelephone("1010332323");
+
+        Pet rajatsDog= new Pet();
+        rajatsDog.setName("Max");
+        rajatsDog.setPetType(savedDogType);
+        rajatsDog.setOwner(owner1);
+        rajatsDog.setBirthDate(LocalDate.now());
+        owner1.getPets().add(rajatsDog);
+
+        Pet shreyasCat = new Pet();
+        shreyasCat.setName("Mini");
+        shreyasCat.setPetType(savedCatType);
+        shreyasCat.setOwner(owner2);
+        shreyasCat.setBirthDate(LocalDate.now());
+        owner2.getPets().add(shreyasCat);
+
+        ownerService.save(owner1);
         ownerService.save(owner2);
 
         System.out.println("Creating Vets");
